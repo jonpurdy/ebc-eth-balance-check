@@ -1,6 +1,7 @@
 import ethereum
-from pycoin.serialize import b2h, h2b
+from pycoin.encoding.hexbytes import b2h, h2b
 from web3.auto import w3
+#from web3.auto.infura import w3
 import random
 
 def main():
