@@ -29,14 +29,7 @@ def main():
 
             #private_key_example = '89cc3093f4f11d868a61bca31193117681c2955deca1be821067a9e8949841fa'
             
-            address = b2h(ethereum.utils.privtoaddr(private_key))
-
-            print("address: 0x%s" % address)
-
-            checksum_address = w3.toChecksumAddress(address)
-            balance = w3.fromWei(w3.eth.getBalance(checksum_address), 'ether')
-
-            
+            balance = check_balance(private_key)
             print("balance: %s" % balance)
 
             if float(balance) > 0:
@@ -48,9 +41,19 @@ def main():
             hash += 1
             try_count += 1
             iterations -= 1
-    except KeyboardInterrupt:
         print("\nFinal stats: %s ETH found." % total_found)
         print("Exiting...")
+
+def check_balance(private_key):
+    address = b2h(ethereum.utils.privtoaddr(private_key))
+
+    print("address: 0x%s" % address)
+
+    checksum_address = w3.toChecksumAddress(address)
+    balance = w3.fromWei(w3.eth.getBalance(checksum_address), 'ether')
+
+
+    return balance
 
 if __name__ == '__main__':
     main()
